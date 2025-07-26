@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: url("https://t3.ftcdn.net/jpg/02/06/14/56/360_F_206145642_ch7d799Dq38xZfRQjEAYRLaYS9jsmezF.jpg") no-repeat center center fixed;
+        background-size: cover;
+    }
+
+    .calculator {
+        width: 300px;
+        background-color: #ffffffba;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .button {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+        margin-top: 20px;
+    }
+
+    .button button {
+        padding: 15px;
+        font-size: 22px;
+        font-weight: 400;
+        border: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .button button:hover {
+        background-color: #0056b3;
+    }
+
+    #display {
+        width: 100%;
+        height: 50px;
+        font-size: 24px;
+        text-align: right;
+        padding: 10px;
+        border: 2px solid #007bff;
+        border-radius: 5px;
+        margin-bottom: 20px;
+        background-color: #f8f9fa;
+        color: #333;
+    }
+
+    #display:disabled {
+        background-color: #e9ecef;
+        color: #6c757d;
+        cursor: not-allowed;
+    }
+
+    .button button:disabled {
+        background-color: #6c757d;
+        cursor: not-allowed;
+    }
+
+    .button button:active {
+        background-color: #0056b3;
+        transform: scale(0.95);
+    }
+
+    .button button:nth-child(1) {
+        background-color: #dc3545;
+    }
+
+    .button button:nth-child(1):hover {
+        background-color: #c82333;
+    }
+
+    .button button:nth-child(2) {
+        background-color: #ffc107;
+        color: #252525;
+        font-weight: bold;
+    }
+
+    .button button:nth-child(2):hover {
+        background-color: #e0a800;
+    }
+
+    .button button:nth-child(3),
+    .button button:nth-child(4) {
+        background-color: #28a745;
+    }
+
+    .button button:nth-child(3):hover,
+    .button button:nth-child(4):hover {
+        background-color: #218838;
+    }
+
+    .button button.zero {
+        grid-column: span 2;
+    }
+
+    .button button.equals {
+        grid-row: span 2;
+    }
+    
+</style>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled />
+        <div class="button">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="DeleteLast()">⌫</button>
+            <button onclick="appendValue('/')">÷</button>
+            <button onclick="appendValue('*')">x</button> 
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('-')">-</button> 
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button onclick="appendValue('+')">+</button> 
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="calculate()" class="equals">=</button>
+            <button onclick="appendValue('0')" class="zero">0</button>
+            <button onclick="appendValue('.')">.</button>
+        </div>
+    </div>
+    <script>
+        let display = document.getElementById('display');
+        function appendValue(value) {
+            display.value += value;
+        }
+        function clearDisplay() {
+            display.value = '';
+        }
+        function DeleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+        function calculate() {
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
